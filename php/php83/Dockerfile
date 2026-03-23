@@ -32,8 +32,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libxml2-dev \
         libssl-dev \
         libcurl4-openssl-dev \
-        libc-client-dev \
-        libkrb5-dev \
         libmemcached-dev \
         librdkafka-dev \
         libonig-dev \
@@ -53,7 +51,6 @@ RUN docker-php-ext-configure gd \
         --with-jpeg \
         --with-webp \
         --with-xpm \
-    && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
     && docker-php-ext-install -j$(nproc) \
         bcmath \
         bz2 \
@@ -64,7 +61,6 @@ RUN docker-php-ext-configure gd \
         gettext \
         gmp \
         iconv \
-        imap \
         intl \
         mbstring \
         mysqli \
