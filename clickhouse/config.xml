@@ -44,11 +44,15 @@
     <!-- 用户数据文件 -->
     <user_files_path>/var/lib/clickhouse/user_files/</user_files_path>
 
-    <!-- 访问控制与账号配置目录 -->
-    <access_control_path>/var/lib/clickhouse/access/</access_control_path>
-
-    <!-- 用户配置文件 -->
-    <users_config>/etc/clickhouse-server/users.xml</users_config>
+    <!-- 用户目录配置（ClickHouse 22.4+ 新格式，替代废弃的 users_config） -->
+    <user_directories>
+        <users_xml>
+            <path>/etc/clickhouse-server/users.xml</path>
+        </users_xml>
+        <local_directory>
+            <path>/var/lib/clickhouse/access/</path>
+        </local_directory>
+    </user_directories>
 
     <!-- 默认数据库 -->
     <default_database>default</default_database>
