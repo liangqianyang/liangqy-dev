@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!--
+    ClickHouse 服务端主配置文件
+    官方文档: https://clickhouse.com/docs/en/operations/server-configuration-parameters/settings
+-->
+<clickhouse>
+    <!-- 日志级别: trace / debug / information / warning / error -->
+    <logger>
+        <level>information</level>
+        <log>/var/log/clickhouse-server/clickhouse-server.log</log>
+        <errorlog>/var/log/clickhouse-server/clickhouse-server.err.log</errorlog>
+        <size>500M</size>
+        <count>3</count>
+    </logger>
+
+    <!-- HTTP 接口端口 -->
+    <http_port>8123</http_port>
+
+    <!-- TCP 原生接口端口 -->
+    <tcp_port>9000</tcp_port>
+
+    <!-- MySQL 兼容协议端口（可选，按需开启） -->
+    <!-- <mysql_port>9004</mysql_port> -->
+
+    <!-- 监听所有接口 -->
+    <listen_host>0.0.0.0</listen_host>
+
+    <!-- 最大连接数 -->
+    <max_connections>4096</max_connections>
+
+    <!-- 保持连接超时 -->
+    <keep_alive_timeout>3</keep_alive_timeout>
+
+    <!-- 最大并发查询数 -->
+    <max_concurrent_queries>100</max_concurrent_queries>
+
+    <!-- 单个查询最大内存（字节，0=不限） -->
+    <max_server_memory_usage>0</max_server_memory_usage>
+
+    <!-- 数据存储路径 -->
+    <path>/var/lib/clickhouse/</path>
+    <tmp_path>/var/lib/clickhouse/tmp/</tmp_path>
+
+    <!-- 用户数据文件 -->
+    <user_files_path>/var/lib/clickhouse/user_files/</user_files_path>
+
+    <!-- 访问控制与账号配置目录 -->
+    <access_control_path>/var/lib/clickhouse/access/</access_control_path>
+
+    <!-- 用户配置文件 -->
+    <users_config>users.xml</users_config>
+
+    <!-- 默认数据库 -->
+    <default_database>default</default_database>
+
+    <!-- 时区 -->
+    <timezone>Asia/Shanghai</timezone>
+
+    <!-- UMASK -->
+    <umask>027</umask>
+
+    <!-- 格式配置 -->
+    <format_schema_path>/var/lib/clickhouse/format_schemas/</format_schema_path>
+
+    <!-- 标记缓存大小 -->
+    <mark_cache_size>5368709120</mark_cache_size>
+
+    <!-- 查询日志 -->
+    <query_log>
+        <database>system</database>
+        <table>query_log</table>
+        <partition_by>toYYYYMM(event_date)</partition_by>
+        <flush_interval_milliseconds>7500</flush_interval_milliseconds>
+    </query_log>
+
+    <!-- 分配器配置（开发环境可关闭） -->
+    <!-- <mlock_executable>true</mlock_executable> -->
+
+    <!-- CORS 支持（允许跨域访问 HTTP 接口） -->
+    <http_handlers>
+        <rule>
+            <url>/</url>
+            <methods>GET</methods>
+            <handler>
+                <type>root</type>
+            </handler>
+        </rule>
+    </http_handlers>
+
+    <!-- 允许来自任意主机的连接（开发环境） -->
+    <listen_backlog>4096</listen_backlog>
+</clickhouse>

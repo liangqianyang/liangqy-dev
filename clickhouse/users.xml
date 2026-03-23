@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!--
+    ClickHouse 用户配置文件
+    官方文档: https://clickhouse.com/docs/en/operations/access-rights
+-->
+<clickhouse>
+    <!-- 用户列表 -->
+    <users>
+        <!-- default 用户（管理员） -->
+        <default>
+            <!-- 密码（明文，生产建议改为 password_sha256_hex） -->
+            <!-- 生成方法: echo -n "yourpassword" | sha256sum -->
+            <password>clickhouse123456</password>
+
+            <!-- 允许来自任何主机的连接 -->
+            <networks>
+                <ip>::/0</ip>
+            </networks>
+
+            <!-- 默认数据库 -->
+            <default_database>default</default_database>
+
+            <!-- 配置文件引用 -->
+            <profile>default</profile>
+            <quota>default</quota>
+
+            <!-- 访问管理（允许此用户管理其他用户） -->
+            <access_management>1</access_management>
+        </default>
+
+        <!-- 只读用户示例（取消注释使用） -->
+        <!--
+        <readonly_user>
+            <password>readonly_pass</password>
+            <networks>
+                <ip>::/0</ip>
+            </networks>
+            <profile>readonly</profile>
+            <quota>default</quota>
+        </readonly_user>
+        -->
+    </users>
+
+    <!-- 配置文件（资源限制） -->
+    <profiles>
+        <default>
+            <!-- 单个查询最大内存 -->
+            <max_memory_usage>10000000000</max_memory_usage>
+            <!-- 最大执行时间（秒，0=不限） -->
+            <max_execution_time>0</max_execution_time>
+            <!-- 使用未压缩缓存 -->
+            <use_uncompressed_cache>0</use_uncompressed_cache>
+            <!-- 查询加载平衡 -->
+            <load_balancing>random</load_balancing>
+        </default>
+
+        <readonly>
+            <readonly>1</readonly>
+        </readonly>
+    </profiles>
+
+    <!-- 配额 -->
+    <quotas>
+        <default>
+            <interval>
+                <duration>3600</duration>
+                <queries>0</queries>
+                <errors>0</errors>
+                <result_rows>0</result_rows>
+                <read_rows>0</read_rows>
+                <execution_time>0</execution_time>
+            </interval>
+        </default>
+    </quotas>
+</clickhouse>

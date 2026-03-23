@@ -1,0 +1,45 @@
+# ============================================================
+# Elasticsearch 8.x 配置文件
+# 官方文档: https://www.elastic.co/guide/en/elasticsearch/reference/current/settings.html
+# ============================================================
+
+# 集群名称
+cluster.name: dev-cluster
+
+# 节点名称
+node.name: dev-node-1
+
+# 数据路径（容器内，mapped 到 named volume）
+path.data: /usr/share/elasticsearch/data
+path.logs: /usr/share/elasticsearch/logs
+
+# 绑定所有接口（容器内）
+network.host: 0.0.0.0
+http.port: 9200
+transport.port: 9300
+
+# 单节点发现（开发环境）
+discovery.type: single-node
+
+# 引导检查（单节点开发环境可关闭部分检查）
+bootstrap.memory_lock: false
+
+# 跨域配置（允许 Kibana / 外部客户端访问）
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+http.cors.allow-headers: "X-Requested-With,Content-Type,Content-Length,Authorization"
+http.cors.allow-credentials: true
+
+# X-Pack 安全（启用认证，关闭 SSL，适合开发环境）
+xpack.security.enabled: true
+xpack.security.http.ssl.enabled: false
+xpack.security.transport.ssl.enabled: false
+
+# 允许所有来源的 API 访问
+xpack.security.authc.api_key.enabled: true
+
+# 监控
+xpack.monitoring.collection.enabled: false
+
+# 索引默认分片数（单节点开发环境用 1）
+action.auto_create_index: true

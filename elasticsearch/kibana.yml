@@ -1,0 +1,41 @@
+# ============================================================
+# Kibana 配置文件
+# 作为 Elasticsearch 的可视化访问客户端
+# ============================================================
+
+# 监听端口
+server.port: 5601
+
+# 绑定所有接口
+server.host: "0.0.0.0"
+
+# 服务名称
+server.name: "dev-kibana"
+
+# ES 连接地址（通过 docker 网络访问）
+elasticsearch.hosts: ["http://elasticsearch:9200"]
+
+# ES 认证
+elasticsearch.username: "elastic"
+elasticsearch.password: "es123456"
+
+# 时区
+# timezone: "Asia/Shanghai"
+
+# 日志
+logging.appenders.default:
+  type: console
+  layout:
+    type: pattern
+    highlight: true
+logging.root:
+  appenders: [default]
+  level: info
+
+# 关闭遥测
+telemetry.enabled: false
+telemetry.optIn: false
+
+# 安全
+xpack.security.enabled: true
+xpack.encryptedSavedObjects.encryptionKey: "dev-env-32-chars-encryption-key!"
