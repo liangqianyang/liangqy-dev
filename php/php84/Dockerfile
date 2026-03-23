@@ -94,8 +94,8 @@ RUN pecl channel-update pecl.php.net \
     && docker-php-ext-enable rdkafka \
     && rm -rf /tmp/pear
 
-# 安装 Swoole（PHP 8.4 支持 swoole 5.1+）
-RUN pecl install swoole-5.1.3 \
+# 安装 Swoole（PHP 8.4 需要 swoole 6.0+，6.x 才正式支持 PHP 8.4）
+RUN pecl install swoole-6.0.0 \
     && docker-php-ext-enable swoole \
     && rm -rf /tmp/pear
 
