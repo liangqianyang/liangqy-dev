@@ -82,7 +82,7 @@ RUN docker-php-ext-configure gd \
 
 # 安装 PECL 扩展
 RUN pecl channel-update pecl.php.net \
-    && pecl install redis-6.0.2 \
+    && pecl install redis-6.1.0 \
     && docker-php-ext-enable redis \
     && pecl install memcached-3.2.0 \
     && docker-php-ext-enable memcached \
