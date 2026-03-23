@@ -77,7 +77,6 @@ RUN docker-php-ext-configure gd \
         sysvmsg \
         sysvsem \
         sysvshm \
-        tokenizer \
         xml \
         xsl \
         zip
