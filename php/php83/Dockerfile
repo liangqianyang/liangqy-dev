@@ -79,8 +79,7 @@ RUN docker-php-ext-configure gd \
         tokenizer \
         xml \
         xsl \
-        zip \
-        fiber
+        zip
 
 # 安装 PECL 扩展
 RUN pecl channel-update pecl.php.net \
