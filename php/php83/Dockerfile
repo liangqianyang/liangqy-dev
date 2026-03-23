@@ -86,7 +86,7 @@ RUN pecl channel-update pecl.php.net \
     && docker-php-ext-enable redis \
     && pecl install memcached-3.2.0 \
     && docker-php-ext-enable memcached \
-    && pecl install mongodb-1.19.0 \
+    && pecl install mongodb-1.20.0 \
     && docker-php-ext-enable mongodb \
     # RdKafka 扩展
     && pecl install rdkafka-6.0.3 \
