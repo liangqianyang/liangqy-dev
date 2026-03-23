@@ -73,7 +73,6 @@ services:
       - ./mysql/logs:/var/log/mysql:rw               # 日志
     networks:
       - dev-network
-    command: --default-authentication-plugin=caching_sha2_password
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-root123456}"]
       interval: 30s

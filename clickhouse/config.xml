@@ -48,7 +48,7 @@
     <access_control_path>/var/lib/clickhouse/access/</access_control_path>
 
     <!-- 用户配置文件 -->
-    <users_config>users.xml</users_config>
+    <users_config>/etc/clickhouse-server/users.xml</users_config>
 
     <!-- 默认数据库 -->
     <default_database>default</default_database>
