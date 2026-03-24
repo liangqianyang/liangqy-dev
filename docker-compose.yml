@@ -219,8 +219,8 @@ services:
       - "5601:5601"
     environment:
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-      - ELASTICSEARCH_USERNAME=elastic
-      - ELASTICSEARCH_PASSWORD=${ES_PASSWORD:-es123456}
+      - ELASTICSEARCH_USERNAME=kibana_system
+      - ELASTICSEARCH_PASSWORD=${KIBANA_SYSTEM_PASSWORD:-kibana123456}
       - TZ=Asia/Shanghai
     volumes:
       - ./elasticsearch/kibana.yml:/usr/share/kibana/config/kibana.yml:ro
