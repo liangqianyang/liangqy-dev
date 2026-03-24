@@ -16,8 +16,8 @@ server.name: "dev-kibana"
 elasticsearch.hosts: ["http://elasticsearch:9200"]
 
 # ES 认证
-elasticsearch.username: "elastic"
-elasticsearch.password: "es123456"
+elasticsearch.username: "kibana_system"
+elasticsearch.password: "kibana123456"
 
 # 时区
 # timezone: "Asia/Shanghai"
