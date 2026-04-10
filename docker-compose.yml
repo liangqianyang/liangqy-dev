@@ -192,7 +192,7 @@ services:
     environment:
       - discovery.type=single-node
       - ELASTIC_PASSWORD=${ES_PASSWORD:-es123456}
-      - ES_JAVA_OPTS=-Xms512m -Xmx1g
+      - ES_JAVA_OPTS=-Xms256m -Xmx512m
       - xpack.security.enabled=true
       - xpack.security.http.ssl.enabled=false
       - xpack.security.transport.ssl.enabled=false
@@ -204,6 +204,8 @@ services:
       - ./elasticsearch/jvm.options:/usr/share/elasticsearch/config/jvm.options:ro
     networks:
       - dev-network
+    mem_limit: 800m
+    memswap_limit: 800m
     ulimits:
       memlock:
         soft: -1
