@@ -232,6 +232,8 @@ services:
       - ./elasticsearch/kibana.yml:/usr/share/kibana/config/kibana.yml:ro
     networks:
       - dev-network
+    mem_limit: 700m
+    memswap_limit: 700m
     depends_on:
       elasticsearch:
         condition: service_healthy

@@ -36,5 +36,8 @@ logging.root:
 telemetry.enabled: false
 telemetry.optIn: false
 
+# Node.js 堆内存限制（4G 宿主机本地开发，限制 512m）
+node.options: --max-old-space-size=512
+
 # 安全
 xpack.encryptedSavedObjects.encryptionKey: "dev-env-32-chars-encryption-key!"
