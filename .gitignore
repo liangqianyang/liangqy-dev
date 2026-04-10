@@ -31,12 +31,8 @@ kafka/logs/*
 nginx/conf.d/*
 !nginx/conf.d/default.conf
 
-# ---- SSL 证书（私钥不提交）----
-nginx/ssl/*.key
-nginx/ssl/*.pem
-nginx/ssl/*.crt
-nginx/ssl/*.p12
-# 保留目录
+# ---- SSL 证书及配置（不提交）----
+nginx/ssl/*
 !nginx/ssl/.gitkeep
 
 # ---- 代码目录（各项目有自己的仓库）----
