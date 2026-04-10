@@ -27,6 +27,10 @@ kafka/logs/*
 !php/logs/php84/.gitkeep
 !elasticsearch/logs/.gitkeep
 
+# ---- Nginx 站点配置（只保留 default.conf）----
+nginx/conf.d/*
+!nginx/conf.d/default.conf
+
 # ---- SSL 证书（私钥不提交）----
 nginx/ssl/*.key
 nginx/ssl/*.pem
