@@ -95,7 +95,9 @@ RUN pecl channel-update pecl.php.net \
     && rm -rf /tmp/pear
 
 # 安装 Swoole（PHP 8.4 需要 swoole 6.0+，6.x 才正式支持 PHP 8.4）
-RUN pecl install swoole-6.0.0 \
+# -D 传入编译期选项，开启 openssl(SWOOLE_SSL)/sockets/http2/mysqlnd 支持
+# 只需 SSL 时删掉其余选项即可
+RUN pecl install -D 'enable-sockets="yes" enable-openssl="yes" enable-http2="yes" enable-mysqlnd="yes"' swoole-6.0.0 \
     && docker-php-ext-enable swoole \
     && rm -rf /tmp/pear
 
