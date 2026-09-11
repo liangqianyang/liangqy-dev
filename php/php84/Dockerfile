@@ -82,17 +82,35 @@ RUN docker-php-ext-configure gd \
         zip
 
 # 安装 PECL 扩展
-RUN pecl channel-update pecl.php.net \
-    && pecl install redis-6.1.0 \
+# 说明：国内服务器直连 pecl.php.net 偶发超时/重置，pecl 单次请求失败会报
+# "does not have REST info xml available"。改为 curl --retry 下载源码包后
+# 从本地 tgz 安装（不依赖 REST 接口），并拆分 RUN 层：重试时只需重跑失败的扩展
+RUN pecl channel-update pecl.php.net || true
+
+RUN curl -fsSL --connect-timeout 15 --retry 5 --retry-all-errors --retry-delay 3 \
+        -o /tmp/redis.tgz https://pecl.php.net/get/redis-6.1.0.tgz \
+    && pecl install /tmp/redis.tgz \
     && docker-php-ext-enable redis \
-    && pecl install memcached-3.2.0 \
+    && rm -f /tmp/redis.tgz
+
+RUN curl -fsSL --connect-timeout 15 --retry 5 --retry-all-errors --retry-delay 3 \
+        -o /tmp/memcached.tgz https://pecl.php.net/get/memcached-3.2.0.tgz \
+    && pecl install /tmp/memcached.tgz \
     && docker-php-ext-enable memcached \
-    && pecl install mongodb-1.20.0 \
+    && rm -f /tmp/memcached.tgz
+
+RUN curl -fsSL --connect-timeout 15 --retry 5 --retry-all-errors --retry-delay 3 \
+        -o /tmp/mongodb.tgz https://pecl.php.net/get/mongodb-1.20.0.tgz \
+    && pecl install /tmp/mongodb.tgz \
     && docker-php-ext-enable mongodb \
-    # RdKafka 扩展
-    && pecl install rdkafka-6.0.3 \
+    && rm -f /tmp/mongodb.tgz
+
+# RdKafka 扩展
+RUN curl -fsSL --connect-timeout 15 --retry 5 --retry-all-errors --retry-delay 3 \
+        -o /tmp/rdkafka.tgz https://pecl.php.net/get/rdkafka-6.0.3.tgz \
+    && pecl install /tmp/rdkafka.tgz \
     && docker-php-ext-enable rdkafka \
-    && rm -rf /tmp/pear
+    && rm -f /tmp/rdkafka.tgz && rm -rf /tmp/pear
 
 # 安装 Swoole（PHP 8.4 需要 swoole 6.0+，6.x 才正式支持 PHP 8.4）
 # -D 传入编译期选项，开启 openssl(SWOOLE_SSL)/sockets/http2/mysqlnd 支持
